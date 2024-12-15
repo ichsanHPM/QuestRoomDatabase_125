@@ -11,16 +11,19 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MahasiswaDao {
 
-    //fungsi get all data
+    //mengambil semua data mahasiswa yang tersimpan di database yang diurutkan berdasarkan nama secara ascending (ASC)
     @Query("SELECT * FROM mahasiswa ORDER BY nama ASC")
     fun getAllMahasiswa() : Flow<List<Mahasiswa>>
 
+    //mengambil data mahasiswa berdasarkan NIM
     @Query("SELECT * FROM mahasiswa WHERE nim = :nim")
     fun getMahasiswa(nim: String) : Flow<Mahasiswa>
-    
+
+    //menghapus data mahasiswa tertentu dari database
     @Delete
     suspend fun updateMahasiswa(mahasiswa: Mahasiswa)
 
+    //memperbaharui informasi mahasiswa yang sudah ada di database
     @Update
     suspend fun updateMahasiswa(mahasiswa: Mahasiswa)
 
